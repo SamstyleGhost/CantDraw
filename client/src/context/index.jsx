@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, createContext, useState } from 'react';
 import { ethers } from 'ethers';
+import("dotenv/config");
 
 const StateContext = createContext();
 

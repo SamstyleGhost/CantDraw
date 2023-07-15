@@ -1,7 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useStateContext } from '../context';
-
-// import ImageIcon from '@mui/icons-material/Image';
 
 const CreateImage = () => {
 
