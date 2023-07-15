@@ -1,40 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useStateContext } from '../context';
+
 // import ImageIcon from '@mui/icons-material/Image';
 
 const CreateImage = () => {
-    
-    const [form, setForm] = useState({
-        prompt: '',
-        photo: '',
-    });
+
+    const { getJob, createJob } = useStateContext();
+
+    const [prompt, setPrompt] = useState("");
+    const [photo, setPhoto] = useState("");
 
     const [generatingImg, setGeneratingImg] = useState(false);
     const [mintingImg, setMintingImg] = useState(false); //still to implement working
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {      
-        setForm({ ...form, prompt: e.target.value });
+        setPrompt(e.target.value);
     }
 
     const handleSubmit = () => {
 
     }
-
+    
     const generateImage = async () => {
 
-        console.log("Form prompt is", form.prompt);
-        if(form.prompt){
-            try {
-                console.log(form.prompt);
-                // setGeneratingImg(true);
-                // sdk.auth('e7bce943-bf22-4962-a2d7-97bd80b16451');
-                // sdk.generate({prompt:`${form.prompt}`})
-                // .then(({ data }) => console.log(data))
-                // .catch(err => console.error(err));                
-            } catch (err) {
-                console.log(err);
-            }
+        setGeneratingImg(true);
+
+        console.log("Inside genImg");
+
+        let job = await createJob({        
+            prompt: prompt,
+        });
+        
+        console.log("Job Created! Waiting...", prompt);
+        
+        while (job.status !== "succeeded" && job.status !== "failed") {
+            await new Promise((resolve) => setTimeout(resolve, 250));
+        
+            job = await getJob(job.job);
         }
+        
+        if(job.status !== "succeeded") {
+            throw new Error("Job failed!"); 
+        }
+        
+        setGeneratingImg(false);
+        setPhoto(job.imageUrl);
+
+        console.log("Generation completed!", job.imageUrl);
     }
 
     const mintImage = () => {
@@ -65,15 +78,15 @@ const CreateImage = () => {
             </div>
             <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
                 <div className=''>
-                    { form.photo ? (
+                    {photo ? (
                     <img
-                        src={form.photo}
-                        alt={form.prompt}
+                        src={photo}
+                        alt={prompt}
                         className="w-full h-full object-contain"
                     />
                     ) : (
                     <img
-                        src={form.photo}
+                        src={photo}
                         alt="preview"
                         className="w-9/12 h-9/12 object-contain opacity-40"
                     />        
