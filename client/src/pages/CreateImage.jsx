@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/*eslint-env node*/
 import React, { useState } from 'react'
-import ImageIcon from '@mui/icons-material/Image';
+// import ImageIcon from '@mui/icons-material/Image';
 
 const CreateImage = () => {
     
@@ -27,13 +25,12 @@ const CreateImage = () => {
         console.log("Form prompt is", form.prompt);
         if(form.prompt){
             try {
-                setGeneratingImg(true);
-                const sdk = require('api')('@prodia/v1.2#ans39zdlk16spqi');
-
-                sdk.auth('e7bce943-bf22-4962-a2d7-97bd80b16451');
-                sdk.generate({prompt:`${form.prompt}`})
-                .then(({ data }) => console.log(data))
-                .catch(err => console.error(err));                
+                console.log(form.prompt);
+                // setGeneratingImg(true);
+                // sdk.auth('e7bce943-bf22-4962-a2d7-97bd80b16451');
+                // sdk.generate({prompt:`${form.prompt}`})
+                // .then(({ data }) => console.log(data))
+                // .catch(err => console.error(err));                
             } catch (err) {
                 console.log(err);
             }
