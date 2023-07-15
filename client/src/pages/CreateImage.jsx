@@ -14,7 +14,6 @@ const CreateImage = () => {
     const [mintingImg, setMintingImg] = useState(false); //still to implement working
     const [loading, setLoading] = useState(false);
 
-
     // const verbwire = require('verbwire')('sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079');
 
     const handleChange = (e) => {      
@@ -54,6 +53,7 @@ const CreateImage = () => {
     }
 
     const URL_to_IPFS = async() => {
+
       const encodedParams = new URLSearchParams();
       encodedParams.set('fileUrl', `${photo}`);
       encodedParams.set('name', `${prompt}`);
@@ -70,20 +70,26 @@ const CreateImage = () => {
         data: encodedParams,
       };
 
+      let meta_url = "";
       await axios
         .request(options)
         .then(function (response) {
-          console.log("Response data is: ", response.data);
+          meta_url = response.data.ipfs_storage.metadata_url;
           console.log("Metadata url is: ", response.data.ipfs_storage.metadata_url);
         })
         .catch(function (error) {
           console.error(error.response.data);
         });
+
+        console.log("Metaurl is: ", meta_url);
+        return meta_url;
     }
     
     const mintImage = async() => {
 
+      setMintingImg(true);
       const img_url = await URL_to_IPFS();
+      console.log("Image URL is: ", img_url);
 
       const mint_data = {
         "contractAddress": '0xFB02f955c2D4FE5E36a59c9879AD3A767C5D8af7',
@@ -112,7 +118,7 @@ const CreateImage = () => {
       };
 
       console.log(options);
-      console.log(mint_data);
+      console.log("Mint Data is: ", mint_data);
       
       await axios
         .request(options)
@@ -122,6 +128,8 @@ const CreateImage = () => {
         .catch(function (error) {
           console.error(error.response.data);
         });
+
+        setMintingImg(false);
     }
 
     return (
