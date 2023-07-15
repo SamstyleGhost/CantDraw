@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Link } from 'react-router-dom';
 import CreateImage from './pages/CreateImage';
 import { useStateContext } from './context';
-// import { logo_ss } from './assets';
+import logo from './assets/logo.jpeg';
 
 const App = () => {
 
@@ -27,8 +27,10 @@ const App = () => {
       )}
 
     </header>
-    <main className="sm:p-8 px-4 py-8 w-full bg-[#f9fafe] min-h-[calc(100vh-73px)]">
-        <CreateImage />
+    <main className="sm:p-8 px-4 py-8 w-full bg-[#1f1f1f]` min-h-[calc(100vh-73px)]">
+      <div>
+          <CreateImage />      
+      </div>
     </main>
   </BrowserRouter>
   )

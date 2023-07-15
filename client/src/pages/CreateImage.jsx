@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useStateContext } from '../context';
+import axios from 'axios';
 
 const CreateImage = () => {
 
-    const { getJob, createJob } = useStateContext();
+    const { getJob, createJob, walletAddress } = useStateContext();
 
     const [prompt, setPrompt] = useState("");
     const [photo, setPhoto] = useState("");
@@ -12,6 +13,9 @@ const CreateImage = () => {
     const [generatingImg, setGeneratingImg] = useState(false);
     const [mintingImg, setMintingImg] = useState(false); //still to implement working
     const [loading, setLoading] = useState(false);
+
+
+    // const verbwire = require('verbwire')('sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079');
 
     const handleChange = (e) => {      
         setPrompt(e.target.value);
@@ -49,8 +53,75 @@ const CreateImage = () => {
         console.log("Generation completed!", job.imageUrl);
     }
 
-    const mintImage = () => {
+    const URL_to_IPFS = async() => {
+      const encodedParams = new URLSearchParams();
+      encodedParams.set('fileUrl', `${photo}`);
+      encodedParams.set('name', `${prompt}`);
+      encodedParams.set('description', `${prompt}`);
 
+      const options = {
+        method: 'POST',
+        url: 'https://api.verbwire.com/v1/nft/store/metadataFromImageUrl',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/x-www-form-urlencoded',
+          'X-API-Key': 'sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079'
+        },
+        data: encodedParams,
+      };
+
+      await axios
+        .request(options)
+        .then(function (response) {
+          console.log("Response data is: ", response.data);
+          console.log("Metadata url is: ", response.data.ipfs_storage.metadata_url);
+        })
+        .catch(function (error) {
+          console.error(error.response.data);
+        });
+    }
+    
+    const mintImage = async() => {
+
+      const img_url = await URL_to_IPFS();
+
+      const mint_data = {
+        "contractAddress": '0xFB02f955c2D4FE5E36a59c9879AD3A767C5D8af7',
+        "recipientAddress": '0x68aD17275f2288F04eE9eaf98C963939dFd75CE3',
+        "chain": 'mumbai',
+        "metadataUrl": `${img_url}`,
+      };
+      // const form = new FormData();
+      // form.append('chain', 'mumbai');
+      // form.append('filepath', 'C:/Users/Rohan/Downloads/logo.jpeg');
+      // form.append('name', 'ShipSink');
+      // form.append('description', 'ShipSink logo');
+      // form.append('contractAddress', '0xFB02f955c2D4FE5E36a59c9879AD3A767C5D8af7');
+      // form.append('recipientAddress', '0x68aD17275f2288F04eE9eaf98C963939dFd75CE3');
+      // form.append('data', '[{"trait_type":"TraitType1","value":"TraitValue1"},{"trait_type":"TraitType2","value":"TraitValue2"}]');
+      
+      const options = {
+        method: 'POST',
+        url: 'https://api.verbwire.com/v1/nft/mint/mintFromMetadataUrl',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'multipart/form-data; boundary=---011000010111000001101001',
+          'X-API-Key': 'sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079',
+        },
+        data: mint_data
+      };
+
+      console.log(options);
+      console.log(mint_data);
+      
+      await axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.error(error.response.data);
+        });
     }
 
     return (
