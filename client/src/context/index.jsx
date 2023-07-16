@@ -2,7 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, createContext, useState } from 'react';
 import { ethers } from 'ethers';
-import("dotenv/config");
+import axios from 'axios';
+import credentials from '../../credentials';
 
 const StateContext = createContext();
 
@@ -12,7 +13,7 @@ export const StateContextProvider = ({ children }) => {
 
     const base = "https://api.prodia.com/v1";
     const headers = {
-      "X-Prodia-Key": "e7bce943-bf22-4962-a2d7-97bd80b16451",
+      "X-Prodia-Key": `${credentials.prodiaKey}`,
     };
     
     const requestAccount = async () =>{
@@ -55,7 +56,9 @@ export const StateContextProvider = ({ children }) => {
         },
         body: JSON.stringify(params),
       });
+      
 
+      // const response = await axios.post(`${base}/job`,JSON.stringify(params),headers)
       console.log("Response is ",response);
     
       if(response.status !== 200) {

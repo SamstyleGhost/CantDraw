@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useStateContext } from '../context';
 import { Loader } from '../components';
 import axios from 'axios';
+import credentials from '../../credentials';
 
 const CreateImage = () => {
 
@@ -13,9 +14,6 @@ const CreateImage = () => {
 
     const [generatingImg, setGeneratingImg] = useState(false);
     const [mintingImg, setMintingImg] = useState(false); //still to implement working
-    const [loading, setLoading] = useState(false);
-
-    // const verbwire = require('verbwire')('sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079');
 
     const handleChange = (e) => {      
         setPrompt(e.target.value);
@@ -66,7 +64,7 @@ const CreateImage = () => {
         headers: {
           accept: 'application/json',
           'content-type': 'application/x-www-form-urlencoded',
-          'X-API-Key': 'sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079'
+          'X-API-Key': `${credentials.verbwireKey}`
         },
         data: encodedParams,
       };
@@ -93,19 +91,11 @@ const CreateImage = () => {
       console.log("Image URL is: ", img_url);
 
       const mint_data = {
-        "contractAddress": '0xFB02f955c2D4FE5E36a59c9879AD3A767C5D8af7',
-        "recipientAddress": '0x68aD17275f2288F04eE9eaf98C963939dFd75CE3',
-        "chain": 'mumbai',
-        "metadataUrl": `${img_url}`,
+        "contractAddress": '0x3db8960311Ff0Fa45175dd419366eFE305139632',
+        "recipientAddress": '0x86D4E2CB09d7B69A1FF9Da48cAB4BC9bd8139E1f',
+        "chain": 'goerli',
+        "metadataUrl": `${img_url}`
       };
-      // const form = new FormData();
-      // form.append('chain', 'mumbai');
-      // form.append('filepath', 'C:/Users/Rohan/Downloads/logo.jpeg');
-      // form.append('name', 'ShipSink');
-      // form.append('description', 'ShipSink logo');
-      // form.append('contractAddress', '0xFB02f955c2D4FE5E36a59c9879AD3A767C5D8af7');
-      // form.append('recipientAddress', '0x68aD17275f2288F04eE9eaf98C963939dFd75CE3');
-      // form.append('data', '[{"trait_type":"TraitType1","value":"TraitValue1"},{"trait_type":"TraitType2","value":"TraitValue2"}]');
       
       const options = {
         method: 'POST',
@@ -113,7 +103,7 @@ const CreateImage = () => {
         headers: {
           accept: 'application/json',
           'content-type': 'multipart/form-data; boundary=---011000010111000001101001',
-          'X-API-Key': 'sk_live_c5d23fdc-5851-4c68-879c-06cbd25ca079',
+          'X-API-Key': `${credentials.verbwireKey}`,
         },
         data: mint_data
       };
