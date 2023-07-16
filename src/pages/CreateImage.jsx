@@ -133,9 +133,9 @@ const CreateImage = () => {
       <div>
         <div className='flex sm:flex-row flex-col flex-wrap flex-2 gap-5 justify-between items-center'>
         <div className='w-full sm:w-1/2 item-start ='>   
-                    <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
+                    <form className='mb-20 max-w-3xl' onSubmit={handleSubmit}>
                       <div className='flex flex-col gap-3'>
-                          <div className='flex items-center gap-2'>
+                          <div className='flex gap-2'>
                           <label className='block text-sm font-medium text text-[#b73d37] ml-1'>
                               Prompt
                           </label>
