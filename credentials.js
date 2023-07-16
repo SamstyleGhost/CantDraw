@@ -1,5 +1,5 @@
-const VERBWIRE_API_KEY = 'sk_live_0c81e7eb-48f1-48b0-8f87-590515969b16';
-const PRODIA_API_KEY = 'e7bce943-bf22-4962-a2d7-97bd80b16451';
+const VERBWIRE_API_KEY = YOUR_VERBWIRE_API_KEY;
+const PRODIA_API_KEY = YOUR_PRODIA_API_KEY;
 
 const credentials = {
     verbwireKey: VERBWIRE_API_KEY,
