@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useStateContext } from '../context';
+import { Loader } from '../components';
 import axios from 'axios';
 
 const CreateImage = () => {
@@ -134,21 +135,22 @@ const CreateImage = () => {
 
     return (
     <section className="max-w-7xl mx-auto">
-      <div>
-        <h1 className="font-extrabold text-[#222328] text-[32px]">Create</h1>
-        <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">Create an image just using text</p>
+    <div className='mx-10 sm:flex flex-col'>
+      <div className='border-b-2 border-white mb-8'>
+        <h1 className="font-extrabold text-[#f3f3f5] text-[32px]">Create</h1>
+        <p className="my-2 text-[#acb0b4] text-[14px] max-w-[500px]">Create an image just using text</p>
       </div>
       <div>
         <div className='flex flex-row flex-wrap flex-2 justify-between'>
-            <div className='w-full md:m-5 sm:w-1/2'>   
+            <div className='w-full sm:w-1/2'>   
                 <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
                     <div className='flex flex-col gap-5'>
                         <div className='flex items-center gap-2'>
-                        <label className='block text-sm font-medium text-gray-900'>
+                        <label className='block text-sm font-medium text-slate-300 ml-1'>
                             Prompt
                         </label>
                         </div>
-                        <div>
+                        <div className='ml-none'>
                             <input type="text" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#4649ff] focus:border-[#4649ff] outline-none block w-full p-3' placeholder='Enter prompt' onChange={handleChange} />
                         </div>
                     </div>
@@ -169,6 +171,12 @@ const CreateImage = () => {
                         className="w-9/12 h-9/12 object-contain opacity-40"
                     />        
                     )}
+
+                    {generatingImg && (
+                      <div className="absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg">
+                        <Loader />
+                      </div>
+                    )}
                 </div>
             </div>  
         </div>
@@ -177,7 +185,7 @@ const CreateImage = () => {
           <button
             type="button"
             onClick={generateImage}
-            className="text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-1/2 px-5 py-2.5 text-center"
+            className="text-white bg-green-700 hover:bg-green-500 font-medium rounded-md text-sm w-full sm:w-1/2 px-5 py-2.5 text-center"
           >
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
@@ -186,10 +194,11 @@ const CreateImage = () => {
           <button
             type="button"
             onClick={mintImage}
-            className="text-white bg-blue-700 font-medium rounded-md text-sm w-full px-5 py-2.5 text-center"
+            className="text-white bg-[#202487] hover:bg-blue-800 font-medium rounded-md text-sm w-full px-5 py-2.5 text-center"
           >
             {mintingImg ? 'Minting...' : 'Mint'}
           </button>
+        </div>
         </div>
     </section>
     )
