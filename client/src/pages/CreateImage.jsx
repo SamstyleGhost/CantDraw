@@ -128,25 +128,25 @@ const CreateImage = () => {
     <div className='mx-10 sm:flex flex-col'>
       <div className='border-b-2 border-white mb-8'>
         <h1 className="font-extrabold text-[#f3f3f5] text-[32px]">Create</h1>
-        <p className="my-2 text-[#acb0b4] text-[14px] max-w-[500px]">Create an image just using text</p>
+        <p className="my-2 text-[#5887b7] text-[14px] max-w-[500px]">Create an image just using text</p>
       </div>
       <div>
-        <div className='flex flex-row flex-wrap flex-2 justify-between'>
-            <div className='w-full sm:w-1/2'>   
-                <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
-                    <div className='flex flex-col gap-5'>
-                        <div className='flex items-center gap-2'>
-                        <label className='block text-sm font-medium text-slate-300 ml-1'>
-                            Prompt
-                        </label>
-                        </div>
+        <div className='flex flex-row flex-wrap flex-2 gap-5 justify-between '>
+        <div className='w-full sm:w-1/2 item-start ='>   
+                    <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
+                      <div className='flex flex-col gap-3'>
+                          <div className='flex items-center gap-2'>
+                          <label className='block text-sm font-medium text text-[#b73d37] ml-1'>
+                              Prompt
+                          </label>
+                          </div>
                         <div className='ml-none'>
-                            <input type="text" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#4649ff] focus:border-[#4649ff] outline-none block w-full p-3' placeholder='Enter prompt' onChange={handleChange} />
+                            <input type="text" className=' bg-transparent border-2 border-[#b73d37] text-white text-sm rounded-lg focus:ring-[#4649ff] focus:border-[#4649ff] outline-none block w-full p-3' placeholder='Enter prompt' onChange={handleChange} />
                         </div>
                     </div>
                 </form>
-            </div>
-            <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
+              </div>
+            <div className="relative  align-end border-4 padding-20px border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center bg-blend-hue">
                 <div className=''>
                     {photo ? (
                     <img
@@ -157,8 +157,8 @@ const CreateImage = () => {
                     ) : (
                     <img
                         src={photo}
-                        alt="preview"
-                        className="w-9/12 h-9/12 object-contain opacity-40"
+                        alt={Image}
+                        className="w-9/12 h-9/12 object-contain opacity-10"
                     />        
                     )}
 
@@ -167,27 +167,31 @@ const CreateImage = () => {
                         <Loader />
                       </div>
                     )}
-                </div>
+              </div>
+              
             </div>  
-        </div>
+            
+            </div>
       </div>
-      <div className="mt-5 flex gap-5">
+      <div className="flex-wrap flex-row justify-center align-medium m-10  ">
+        <div className="mt-5 flex w justify-center">
           <button
             type="button"
             onClick={generateImage}
-            className="text-white bg-green-700 hover:bg-green-500 font-medium rounded-md text-sm w-full sm:w-1/2 px-5 py-2.5 text-center"
+            className=" bg-[#b73d37] hover:bg-[#ec5a52] text-black hover:text-white font-medium rounded-md text-sm w-7/12 sm:w-1/8 px-5 py-2.5 text-center"
           >
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
         </div>
-        <div className="mt-10 flex gap-5">
+        <div className="mt-10 flex gap-5 justify-center">
           <button
             type="button"
             onClick={mintImage}
-            className="text-white bg-[#202487] hover:bg-blue-800 font-medium rounded-md text-sm w-full px-5 py-2.5 text-center"
+            className="text-black bg-[#4448b9] hover:bg-blue-800 font-medium rounded-md text-sm w-7/12 px-5 py-2.5  text-center"
           >
             {mintingImg ? 'Minting...' : 'Mint'}
           </button>
+        </div>
         </div>
         <div>
           {mintingImg && (
