@@ -131,7 +131,11 @@ const CreateImage = () => {
         <p className="my-2 text-[#5887b7] text-[14px] max-w-[500px]">Create an image just using text</p>
       </div>
       <div>
+<<<<<<< HEAD:src/pages/CreateImage.jsx
         <div className='flex sm:flex-row flex-col flex-wrap flex-2 gap-5 justify-between items-center'>
+=======
+        <div className='flex flex-row flex-wrap flex-2 gap-5 justify-between '>
+>>>>>>> 1d29664a534f9d907b8353b568435a946a8c2d38:client/src/pages/CreateImage.jsx
         <div className='w-full sm:w-1/2 item-start ='>   
                     <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
                       <div className='flex flex-col gap-3'>
@@ -146,8 +150,13 @@ const CreateImage = () => {
                     </div>
                 </form>
               </div>
+<<<<<<< HEAD:src/pages/CreateImage.jsx
             <div className="relative  align-end border-4 padding-20px border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-3 h-96 flex justify-center items-center bg-blend-hue">
                 <div>
+=======
+            <div className="relative  align-end border-4 padding-20px border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center bg-blend-hue">
+                <div className=''>
+>>>>>>> 1d29664a534f9d907b8353b568435a946a8c2d38:client/src/pages/CreateImage.jsx
                     {photo ? (
                     <img
                         src={photo}
@@ -173,21 +182,37 @@ const CreateImage = () => {
             
             </div>
       </div>
+<<<<<<< HEAD:src/pages/CreateImage.jsx
       <div className="flex-wrap flex-row justify-center align-medium mt-10">
+=======
+      <div className="flex-wrap flex-row justify-center align-medium m-10  ">
+>>>>>>> 1d29664a534f9d907b8353b568435a946a8c2d38:client/src/pages/CreateImage.jsx
         <div className="mt-5 flex w justify-center">
           <button
             type="button"
             onClick={generateImage}
+<<<<<<< HEAD:src/pages/CreateImage.jsx
             className=" bg-[#b73d37] hover:bg-[#ec5a52] text-black hover:text-white font-medium rounded-md text-sm w-7/12 sm:w-1/8 px-5 py-2.5 text-center outline outline-offset-1"
+=======
+            className=" bg-[#b73d37] hover:bg-[#ec5a52] text-black hover:text-white font-medium rounded-md text-sm w-7/12 sm:w-1/8 px-5 py-2.5 text-center"
+>>>>>>> 1d29664a534f9d907b8353b568435a946a8c2d38:client/src/pages/CreateImage.jsx
           >
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
         </div>
+<<<<<<< HEAD:src/pages/CreateImage.jsx
         <div className="mt-10 mb-5 flex gap-5 justify-center">
           <button
             type="button"
             onClick={mintImage}
             className="text-black bg-[#4448b9] hover:bg-blue-800 hover:text-white font-medium rounded-md text-sm w-7/12 px-5 py-2.5  text-center outline outline-offset-1"
+=======
+        <div className="mt-10 flex gap-5 justify-center">
+          <button
+            type="button"
+            onClick={mintImage}
+            className="text-black bg-[#4448b9] hover:bg-blue-800 font-medium rounded-md text-sm w-7/12 px-5 py-2.5  text-center"
+>>>>>>> 1d29664a534f9d907b8353b568435a946a8c2d38:client/src/pages/CreateImage.jsx
           >
             {mintingImg ? 'Minting...' : 'Mint'}
           </button>
