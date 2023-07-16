@@ -199,7 +199,16 @@ const CreateImage = () => {
             {mintingImg ? 'Minting...' : 'Mint'}
           </button>
         </div>
+        <div>
+          {mintingImg && (
+            <div className='w-full flex items-center'>
+              <div className='mx-auto my-8'>
+                <Loader />
+              </div>
+            </div>
+          )}
         </div>
+      </div>
     </section>
     )
 }
