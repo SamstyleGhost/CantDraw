@@ -157,7 +157,7 @@ const CreateImage = () => {
                     ) : (
                     <img
                         src={photo}
-                        alt={Image}
+                        alt={prompt}
                         className="w-9/12 h-9/12 object-contain opacity-10"
                     />        
                     )}
